@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="main.js"></script>
+<title>HTML 5 complete</title>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+
+
+<![endif]-->
+<style>
+  article, aside, dialog, figure, footer, header,
+  hgroup, menu, nav, section { display: block; }
+</style>
+</head>
+<body>
+<input type="file" id="files" name="files[]" multiple />
+<input type="button" id="button" value="Reverse">
+<canvas id="canvas"></canvas>
+</body>
+</html>

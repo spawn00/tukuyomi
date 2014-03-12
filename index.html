@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title> - jsFiddle demo</title>
+  
+  <script type='text/javascript' src='/js/lib/dummy.js'></script>
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+  <style type='text/css'>
+    
+  </style>
+  
+
+
+<script type='text/javascript'>//<![CDATA[ 
+window.onload=function(){
+var files = document.getElementById('files')
+var button = document.getElementById('button');
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+
+files.addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    if(!file.type.match('image.*')) return;
+    var fr = new FileReader();
+    fr.onload = function() {
+        img = new Image();
+        img.onload = function() {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+        }
+        img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+});
+
+button.addEventListener('click', function() {
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var pixels = imageData.data;
+    var numPixels = imageData.width * imageData.height;
+    for(var i = 0; i < numPixels; ++i) {
+        pixels[i*4+0] = 255 - pixels[i*4+0];
+        pixels[i*4+1] = 255 - pixels[i*4+1];
+        pixels[i*4+2] = 255 - pixels[i*4+2]
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.putImageData(imageData, 0, 0);
+});
+}//]]>  
+
+</script>
+<script src="http://debug.phonegap.com/target/target-script-min.js#jsf_qpm"></script></head>
+<body>
+<input type="file" id="files" name="files[]" multiple />
+<br>
+<input type="image" id="button" src="img.jpg" value="月夜見！">
+<canvas id="canvas"></canvas>
+  
+</body>
+</html>
+
+
+
